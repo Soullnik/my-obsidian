@@ -37,8 +37,6 @@ export async function getStaticPaths() {
     };
 }
 
-const {nodes, edges} = constructGraphData()
-
 export function getStaticProps({params}) {
     const note = getSinglePost(params.id);
     const tree = convertObject(getDirectoryData());

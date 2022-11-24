@@ -22,7 +22,6 @@ export default function Home({content, tree, flattenNodes, backLinks}) {
     );
 
 }
-const {nodes, edges} = constructGraphData()
 
 export function getStaticProps() {
     const tree = convertObject(getDirectoryData());
