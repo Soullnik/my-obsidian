@@ -22,21 +22,3 @@ export default function Home({content, tree, flattenNodes, backLinks}) {
     );
 
 }
-
-export function getStaticProps() {
-    const tree = convertObject(getDirectoryData());
-    const contentData = getSinglePost("index");
-    const flattenNodes = getFlattenArray(tree)
-    const listOfEdges =   edges.filter(anEdge => anEdge.target === "index")
-    const internalLinks = listOfEdges.map(anEdge => nodes.find(aNode => aNode.slug === anEdge.source)).filter(element => element !== undefined)
-    const backLinks = [...new Set(internalLinks)]
-
-    return {
-        props: {
-            content: contentData.data,
-            tree: tree,
-            flattenNodes: flattenNodes,
-            backLinks: backLinks
-        },
-    };
-}

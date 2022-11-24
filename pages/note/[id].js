@@ -26,31 +26,3 @@ export default function Home({note, backLinks, fileNames, tree, flattenNodes}) {
         </Layout>
     );
 }
-
-export async function getStaticPaths() {
-    const allPostsData = getAllSlugs();
-    const paths = allPostsData.map(p => ({params: {id: p}}))
-
-    return {
-        paths,
-        fallback: false
-    };
-}
-
-export function getStaticProps({params}) {
-    const note = getSinglePost(params.id);
-    const tree = convertObject(getDirectoryData());
-    const flattenNodes = getFlattenArray(tree)
-
-    const listOfEdges =   edges.filter(anEdge => anEdge.target === params.id)
-    const internalLinks = listOfEdges.map(anEdge => nodes.find(aNode => aNode.slug === anEdge.source)).filter(element => element !== undefined)
-    const backLinks = [...new Set(internalLinks)]
-    return {
-        props: {
-            note,
-            tree: tree,
-            flattenNodes: flattenNodes,
-            backLinks: backLinks.filter(link => link.slug !== params.id),
-        },
-    };
-}
