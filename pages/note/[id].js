@@ -12,11 +12,6 @@ import {getFlattenArray} from "../../lib/utils";
 import MDContent from "../../components/MDContent";
 import dynamic from 'next/dynamic'
 
-const DynamicGraph = dynamic(
-    () => import('../../components/Graph'),
-    { loading: () => <p>Loading ...</p>, ssr: false }
-)
-
 export default function Home({note, backLinks, fileNames, tree, flattenNodes, graphData}) {
 
     return (
@@ -29,7 +24,6 @@ export default function Home({note, backLinks, fileNames, tree, flattenNodes, gr
                     <FolderTree tree={tree} flattenNodes={flattenNodes}/>
                 </nav>
                 <MDContent content={note.data} fileNames={fileNames} handleOpenNewContent={null} backLinks={backLinks}/>
-                <DynamicGraph graph={graphData}/>
             </div>
 
         </Layout>
